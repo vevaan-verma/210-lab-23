@@ -18,7 +18,7 @@ int getValidatedChoice(int min, int max);
 /* CONSTANTS */
 const int SZ_NAMES = 200, SZ_COLORS = 25, MAX_AGE = 20;
 
-// main() is the entry point of the program
+// main() is the entry point of the program and drives the program
 // arguments: none
 // returns: int - the exit code of the program
 int main() {
@@ -43,6 +43,33 @@ int main() {
 	while (fin1 >> colors[i++]);
 
 	fin1.close();
+
+	list<Goat> trip; // create a list of goats
+	int choice = main_menu();
+	cout << endl; // blank line for formatting purposes
+
+	while (choice != 4) { // keep looping until player quits
+
+		switch (choice) {
+
+		case 1: // add a goat
+			add_goat(trip, names, colors);
+			break;
+
+		case 2: // delete a goat
+			delete_goat(trip);
+			break;
+
+		case 3: // display goats
+			display_trip(trip);
+			break;
+
+		}
+
+		choice = main_menu(); // get the user's next choice
+		cout << endl; // blank line for formatting purposes
+
+	}
 
 	return 0;
 
@@ -100,6 +127,7 @@ void add_goat(list<Goat>& trip, string names[], string colors[]) {
 void delete_goat(list<Goat>& trip) {
 
 	int index = select_goat(trip); // get the index of the goat to delete
+	cout << endl; // blank line for formatting purposes
 	list<Goat>::iterator it = trip.begin(); // create an iterator to the beginning of the list
 	advance(it, index); // advance the iterator to the index of the goat to delete
 	trip.erase(it); // delete the goat
@@ -111,8 +139,12 @@ void delete_goat(list<Goat>& trip) {
 // returns: none
 void display_trip(list<Goat> trip) {
 
+	cout << "*** TRIP ***\n"; // output the trip header
+
 	for (list<Goat>::iterator iterator = trip.begin(); iterator != trip.end(); iterator++) // iterate through the list of goats
-		cout << (*iterator).get_name() << endl; // output the goat's name, age, and color
+		cout << (*iterator).get_name() << " (" << (*iterator).get_age() << ", " << (*iterator).get_color() << ")" << endl; // output the goat's name, age, and color
+
+	cout << endl; // blank line for formatting purposes
 
 }
 
