@@ -84,6 +84,38 @@ int select_goat(list<Goat> trip) {
 
 }
 
+// add_goat() adds a goat to the trip
+// arguments: list<Goat> trip - the list of goats, string names[] - the array of names, string colors[] - the array of colors
+// returns: none
+void add_goat(list<Goat>& trip, string names[], string colors[]) {
+
+	Goat goat(names[rand() % SZ_NAMES], rand() % MAX_AGE, colors[rand() % SZ_COLORS]); // create a goat with a random name (from the names array), random age (from 0 to MAX_AGE), and random color (from the colors array)
+	trip.push_back(goat); // add the goat to the list
+
+}
+
+// delete_goat() deletes a goat from the trip
+// arguments: list<Goat> trip - the list of goats
+// returns: none
+void delete_goat(list<Goat>& trip) {
+
+	int index = select_goat(trip); // get the index of the goat to delete
+	list<Goat>::iterator it = trip.begin(); // create an iterator to the beginning of the list
+	advance(it, index); // advance the iterator to the index of the goat to delete
+	trip.erase(it); // delete the goat
+
+}
+
+// display_trip() outputs all the goats in the trip
+// arguments: list<Goat> trip - the list of goats
+// returns: none
+void display_trip(list<Goat> trip) {
+
+	for (list<Goat>::iterator iterator = trip.begin(); iterator != trip.end(); iterator++) // iterate through the list of goats
+		cout << (*iterator).get_name() << endl; // output the goat's name, age, and color
+
+}
+
 // getValidatedChoice() gets a validated integer choice from the user (between min and max)
 // arguments: int min - the minimum value, int max - the maximum value
 // returns: int - the validated integer choice
