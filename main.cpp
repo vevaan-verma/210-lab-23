@@ -71,6 +71,10 @@ int main() {
 
 	}
 
+	// test the operator overload for sorting
+	trip.sort(); // sort the list of goats
+	display_trip(trip); // display the sorted list of goats
+
 	return 0;
 
 }
